@@ -1,8 +1,8 @@
-# Vite Project Boilerplate
+# About-Me-Front
 
 ## Repository contents
 
-Repository contains boilerplate project using Vite.
+Repository contains an About-Me project using Vite.
 
 Project is using tools in versions listed below:
 
@@ -40,10 +40,6 @@ Project's main dependencies are listed below.
 - **Storybook** - UI development environment and playground for building, previewing, and testing isolated components interactively
 - **[@gi-org-pl/athena](https://www.npmjs.com/package/@gi-org-pl/athena)** - Our front-end component package, published to npm. You can [modify it here](https://github.com/gi-org-pl/athena)
 
-## Infrastructure
-
-This is a frontend-only boilerplate that runs locally using Vite development server.
-
 ## Setting project up
 
 This app uses Node.js and Yarn package manager. In order to set up project, follow these steps:
@@ -61,13 +57,13 @@ This app uses Node.js and Yarn package manager. In order to set up project, foll
 3. Clone project by running:
 
    ```shell
-   git clone <your-repository-url>
+   git clone git@github.com:Chromamouse/About-Me-Front
    ```
 
 4. Navigate to the project directory:
 
    ```shell
-   cd vite-project-boilerplate
+   cd About-Me-Front
    ```
 
 5. Install dependencies using Yarn:
