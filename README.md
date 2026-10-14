@@ -1,16 +1,23 @@
-# Vite Project Boilerplate
+# About-Me-Front
 
 ## Repository contents
 
-Repository contains boilerplate project using Vite.
+Repository contains an About-Me project using Vite.
 
-Project is using tools in versions listed below:
+Key technologies
 
-| Technology | Version |
-| ---------- | ------- |
-| Node.js    | ^24.x   |
-| TypeScript | ^5.9    |
-| Yarn       | ^1.22   |
+    React — Building reusable, interactive user interface components.
+    TypeScript — Improving code quality and maintainability with static typing.
+    Vite — Providing a fast development environment and optimized production builds.
+    Tailwind CSS — Styling the application with a utility-first CSS framework.
+    React Router — Handling client-side navigation between pages.
+    Zustand — Managing application state when needed.
+    Axios — Handling HTTP requests.
+    Zod — Validating data at runtime.
+    Vitest — Testing components and application logic.
+    Playwright — Running end-to-end browser tests.
+    Storybook — Developing and documenting UI components in isolation.
+    @gi-org-pl/athena — Providing reusable UI components and shared styling.
 
 Project's main dependencies are listed below.
 
@@ -27,30 +34,12 @@ Project's main dependencies are listed below.
 | Storybook    | ^10.x   |
 | @gi-org-pl/athena | ^1.x |
 
-### Package descriptions
-
-- **Vite** - Next-generation frontend build tool providing fast development experience with instant HMR and optimized production builds
-- **React** - JavaScript library for building user interfaces
-- **Tailwind CSS** - Utility-first CSS framework for rapid UI development
-- **Zod** - TypeScript-first schema validation library for runtime type checking
-- **Axios** - Promise-based HTTP client for making API requests
-- **Vitest** - Fast unit testing framework powered by Vite
-- **Playwright** - End-to-end testing framework for reliable cross-browser testing
-- **Zustand** - Lightweight state management library for React applications
-- **Storybook** - UI development environment and playground for building, previewing, and testing isolated components interactively
-- **[@gi-org-pl/athena](https://www.npmjs.com/package/@gi-org-pl/athena)** - Our front-end component package, published to npm. You can [modify it here](https://github.com/gi-org-pl/athena)
-
-## Infrastructure
-
-This is a frontend-only boilerplate that runs locally using Vite development server.
-
 ## Setting project up
 
-This app uses Node.js and Yarn package manager. In order to set up project, follow these steps:
+1. Before running the project, make sure you have installed:
 
-1. Install Node.js (v24.x or higher):
-   - Download from [nodejs.org](https://nodejs.org/)
-   - Use a version manager like [nvm](https://github.com/nvm-sh/nvm)
+    Node.js version 24 or higher
+    Yarn 1.22.x
 
 2. Install Yarn globally:
 
@@ -61,13 +50,13 @@ This app uses Node.js and Yarn package manager. In order to set up project, foll
 3. Clone project by running:
 
    ```shell
-   git clone <your-repository-url>
+   git clone git@github.com:Chromamouse/About-Me-Front
    ```
 
 4. Navigate to the project directory:
 
    ```shell
-   cd vite-project-boilerplate
+   cd About-Me-Front
    ```
 
 5. Install dependencies using Yarn:
@@ -124,37 +113,14 @@ yarn e2e               # Run E2E tests
 yarn e2e:ui            # Run E2E tests in UI mode
 ```
 
-## Linting
-
-This boilerplate uses BiomeJS for code linting and formatting. Biome is a fast, all-in-one toolchain that replaces ESLint, Prettier, and other tools.
-
-- **Linter**: BiomeJS provides fast linting with TypeScript support
-- **Formatter**: Built-in code formatter with consistent style
-- **Import Organization**: Automatic import sorting and organization
-
-Run linting with:
-
-```bash
-yarn lint              # Check for linting issues
-yarn lint:fix          # Automatically fix linting and formatting issues
-```
-
-The project is configured with custom linting rules in `biome.json`, including complexity checks, style rules, and correctness validations for TypeScript files.
-
 ## Visual testing
 
-This boilerplate uses Storybook for visual testing and component development. Storybook provides an isolated environment to develop, test, and document UI components independently.
-
-- **Component Development**: Build and test components in isolation
-- **Visual Testing**: Preview components with different props and states
-- **Documentation**: Auto-generate component documentation from stories
-- **Addons**: Includes accessibility, docs, and Vitest integration addons
+This Project uses Storybook for visual testing and component development. Storybook provides an isolated environment to develop, test, and document UI components independently.
 
 Run Storybook with:
 
 ```bash
 yarn storybook        # Start Storybook development server (http://localhost:6006)
-yarn storybook:build  # Build Storybook for production deployment
 ```
 
 ## Working with Athena
@@ -168,15 +134,3 @@ A new Athena version is published automatically after each merge to Athena's `ma
 ```bash
 yarn upgrade @gi-org-pl/athena --latest
 ```
-
-## Resources
-
-- [Vite Documentation](https://vite.dev/) - Vite build tool documentation
-- [React Router Documentation](https://reactrouter.com/) - React Router framework documentation
-- [React Documentation](https://react.dev/reference/react) - React.js reference
-- [Learn React](https://react.dev/learn) - an interactive React.js tutorial
-- [Tailwind CSS Documentation](https://tailwindcss.com/) - Tailwind CSS documentation
-- [Vitest Documentation](https://vitest.dev/) - Vitest testing framework documentation
-- [Playwright Documentation](https://playwright.dev/) - Playwright E2E testing documentation
-- [BiomeJS Documentation](https://biomejs.dev/) - BiomeJS linter and formatter documentation
-- [Storybook Documentation](https://storybook.js.org/) - Storybook component development and visual testing documentation
