@@ -37,7 +37,7 @@ export function HeroSection({
           <img
             src={imageSrc}
             alt={imageAlt}
-            className="aspect-[3/5] w-100vm rounded-full object-cover grayscale transition duration-700"
+            className="aspect-[3/5] w-100vw rounded-full object-cover grayscale transition duration-700"
           />
         </div>
       </div>
