@@ -6,7 +6,8 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   plugins: [react()],
   test: {
-    include: ["**/*.test.tsx", "**/*.test.ts"],
+    include: ["src/**/*.test.tsx", "src/**/*.test.ts"],
+    exclude: ["**/node_modules/**", "**/.react-router/**"],
     globals: true,
     environment: "jsdom",
     setupFiles: ["./setupTests.ts"],
