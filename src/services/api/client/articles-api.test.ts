@@ -10,7 +10,7 @@ vi.mock("./axios-client", () => ({
   },
 }));
 
-import { getArticles } from "./articles-api";
+import { getArticleById, getArticles } from "./articles-api";
 
 describe("getArticles", () => {
   beforeEach(() => {
@@ -40,6 +40,7 @@ describe("getArticles", () => {
     expect(mockGet).toHaveBeenCalledWith("/api/v1/articles", {
       signal: undefined,
     });
+
     expect(result.map((article) => article.id)).toEqual([
       "550e8400-e29b-41d4-a716-446655440002",
       "550e8400-e29b-41d4-a716-446655440001",
@@ -47,6 +48,7 @@ describe("getArticles", () => {
 
     // The original array remains unchanged.
     expect(articles[0].title).toBe("Older article");
+    expect(articles[0].id).toBe("550e8400-e29b-41d4-a716-446655440001");
   });
 
   it("passes an AbortSignal to Axios", async () => {
@@ -79,5 +81,71 @@ describe("getArticles", () => {
     });
 
     await expect(getArticles()).rejects.toThrow();
+  });
+});
+
+describe("getArticleById", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  const article = {
+    id: "550e8400-e29b-41d4-a716-446655440001",
+    title: "Test article",
+    text: "Test article content",
+    publishedAt: "2025-01-01T10:00:00.000Z",
+  };
+
+  it("fetches an article by ID", async () => {
+    mockGet.mockResolvedValue({ data: article });
+
+    const result = await getArticleById(article.id);
+
+    expect(mockGet).toHaveBeenCalledWith(`/api/v1/articles/${article.id}`, {
+      signal: undefined,
+    });
+    expect(result).toEqual(article);
+  });
+
+  it("URL-encodes the article ID", async () => {
+    const id = "article/id with spaces";
+    mockGet.mockResolvedValue({ data: article });
+
+    await getArticleById(id);
+
+    expect(mockGet).toHaveBeenCalledWith(
+      `/api/v1/articles/${encodeURIComponent(id)}`,
+      { signal: undefined },
+    );
+  });
+
+  it("passes an AbortSignal to Axios", async () => {
+    const controller = new AbortController();
+    mockGet.mockResolvedValue({ data: article });
+
+    await getArticleById(article.id, controller.signal);
+
+    expect(mockGet).toHaveBeenCalledWith(`/api/v1/articles/${article.id}`, {
+      signal: controller.signal,
+    });
+  });
+
+  it("propagates request errors", async () => {
+    mockGet.mockRejectedValue(new Error("Network error"));
+
+    await expect(getArticleById(article.id)).rejects.toThrow("Network error");
+  });
+
+  it("rejects invalid article data", async () => {
+    mockGet.mockResolvedValue({
+      data: {
+        id: "not-a-uuid",
+        title: "Invalid article",
+        text: "Invalid content",
+        publishedAt: "not-a-date",
+      },
+    });
+
+    await expect(getArticleById(article.id)).rejects.toThrow();
   });
 });
