@@ -1,5 +1,6 @@
-import { sb } from "storybook/test";
 import type { Preview } from "@storybook/react-vite";
+import { sb } from "storybook/test";
+
 sb.mock(import("../src/services/api/client/articles-api"));
 
 import "../src/index.css";

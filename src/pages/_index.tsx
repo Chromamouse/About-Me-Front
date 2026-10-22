@@ -60,9 +60,9 @@ const Index = () => {
           ]}
         />
 
-        <Footer copyright="© 2026 Dawid Małek" />
+          <BlogSection></BlogSection>
 
-        <BlogSection></BlogSection>
+        <Footer copyright="© 2026 Dawid Małek" />
       </div>
     </main>
   );
