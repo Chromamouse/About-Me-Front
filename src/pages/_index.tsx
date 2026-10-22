@@ -1,10 +1,10 @@
 import staticImage from "../assets/images/static1.jpg";
 import { AboutSection } from "../components/shared/AboutSection/AboutSection";
+import { BlogSection } from "../components/shared/BlogSection/BlogSection";
 import { Footer } from "../components/shared/Footer/Footer";
 import { HeroSection } from "../components/shared/HeroSection/HeroSection";
 import { LinkButton } from "../components/shared/LinkButton/LinkButton";
 import { SkillsSection } from "../components/shared/SkillsSection/SkillsSection";
-import { BlogSection } from '../components/shared/BlogSection/BlogSection';
 
 const Index = () => {
   return (
@@ -62,7 +62,7 @@ const Index = () => {
 
         <Footer copyright="© 2026 Dawid Małek" />
 
-          <BlogSection></BlogSection>
+        <BlogSection></BlogSection>
       </div>
     </main>
   );
