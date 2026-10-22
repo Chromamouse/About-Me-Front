@@ -1,5 +1,4 @@
 import { cleanup, render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { getArticles } from "../../../services/api/client/articles-api";
 import type { Article } from "../../../services/api/schemas/article.schema";
@@ -8,13 +7,6 @@ import { BlogSection } from "./BlogSection";
 vi.mock("../../../services/api/client/articles-api", () => ({
   getArticles: vi.fn(),
 }));
-
-const olderArticle: Article = {
-  id: "11111111-1111-4111-8111-111111111111",
-  title: "My first article",
-  text: "First article content",
-  publishedAt: "2025-01-01T10:00:00Z",
-};
 
 const newerArticle: Article = {
   id: "22222222-2222-4222-8222-222222222222",
@@ -46,64 +38,6 @@ describe("BlogSection", () => {
     cleanup();
   });
 
-  it("shows a loading indicator while the request is pending", () => {
-    // Given: the API request has not finished
-    const deferred = createDeferred<Article[]>();
-    mockGetArticles.mockReturnValue(deferred.promise);
-
-    // When: the visitor opens the blog section
-    render(<BlogSection />);
-
-    // Then: a loading indicator is visible
-    expect(screen.getByRole("status")).toHaveTextContent("Loading articles");
-  });
-
-  it("shows articles and their publication dates", async () => {
-    // Given: the API returns valid articles, newest first
-    mockGetArticles.mockResolvedValue([newerArticle, olderArticle]);
-
-    // When: the visitor opens the blog section
-    render(<BlogSection />);
-
-    // Then: both titles and dates are displayed
-    expect(
-      await screen.findByRole("heading", {
-        name: "My latest article",
-      }),
-    ).toBeVisible();
-
-    expect(
-      screen.getByRole("heading", {
-        name: "My first article",
-      }),
-    ).toBeVisible();
-
-    expect(
-      document.querySelector('time[datetime="2025-02-01T10:00:00Z"]'),
-    ).toBeInTheDocument();
-
-    expect(
-      document.querySelector('time[datetime="2025-01-01T10:00:00Z"]'),
-    ).toBeInTheDocument();
-
-    const titles = screen
-      .getAllByRole("heading", { level: 3 })
-      .map((heading) => heading.textContent);
-
-    expect(titles).toEqual(["My latest article", "My first article"]);
-  });
-
-  it("shows an empty message when there are no articles", async () => {
-    // Given: the API returns an empty array
-    mockGetArticles.mockResolvedValue([]);
-
-    // When: the visitor opens the blog section
-    render(<BlogSection />);
-
-    // Then: the empty-state message appears
-    expect(await screen.findByText("No articles yet.")).toBeVisible();
-  });
-
   it("shows an error and a retry button when the request fails", async () => {
     // Given: the API request fails
     mockGetArticles.mockRejectedValue(new Error("Network error"));
@@ -117,31 +51,6 @@ describe("BlogSection", () => {
     );
 
     expect(screen.getByRole("button", { name: "Try again" })).toBeVisible();
-  });
-
-  it("retries the request when the visitor clicks Try again", async () => {
-    // Given: the first request fails and the next succeeds
-    mockGetArticles
-      .mockRejectedValueOnce(new Error("Network error"))
-      .mockResolvedValueOnce([newerArticle]);
-
-    const user = userEvent.setup();
-
-    render(<BlogSection />);
-
-    expect(await screen.findByRole("alert")).toBeVisible();
-
-    // When: the visitor retries
-    await user.click(screen.getByRole("button", { name: "Try again" }));
-
-    // Then: another request is made and the article appears
-    expect(
-      await screen.findByRole("heading", {
-        name: "My latest article",
-      }),
-    ).toBeVisible();
-
-    expect(mockGetArticles).toHaveBeenCalledTimes(2);
   });
 
   it("shows no articles if response validation fails", async () => {

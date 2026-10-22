@@ -1,4 +1,8 @@
-import { type Article, articleSchema, articlesSchema } from "../schemas/article.schema";
+import {
+  type Article,
+  articleSchema,
+  articlesSchema,
+} from "../schemas/article.schema";
 import { axiosClient } from "./axios-client";
 
 export async function getArticles(signal?: AbortSignal): Promise<Article[]> {
@@ -9,17 +13,17 @@ export async function getArticles(signal?: AbortSignal): Promise<Article[]> {
   const articles = articlesSchema.parse(response.data);
 
   return [...articles].sort(
-      (a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt),
+    (a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt),
   );
 }
 
 export async function getArticleById(
-    id: string,
-    signal?: AbortSignal,
+  id: string,
+  signal?: AbortSignal,
 ): Promise<Article> {
   const response = await axiosClient.get<unknown>(
-      `/api/v1/articles/${encodeURIComponent(id)}`,
-      { signal },
+    `/api/v1/articles/${encodeURIComponent(id)}`,
+    { signal },
   );
 
   return articleSchema.parse(response.data);
