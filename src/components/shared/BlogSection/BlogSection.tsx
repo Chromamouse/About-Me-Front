@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 import { getArticles } from "../../../services/api/client/articles-api";
 import type { Article } from "../../../services/api/schemas/article.schema";
 
@@ -73,7 +74,7 @@ export function BlogSection() {
           {state.articles.map((article) => (
             <li key={article.id} className="min-w-0 border-b pb-4">
               <h3 className="break-words [overflow-wrap:anywhere]">
-                {article.title}
+                <Link to={`/articles/${article.id}`}>{article.title}</Link>
               </h3>
 
               <time dateTime={article.publishedAt}>
