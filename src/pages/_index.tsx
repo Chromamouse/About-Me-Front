@@ -1,5 +1,6 @@
 import staticImage from "../assets/images/static1.jpg";
 import { AboutSection } from "../components/shared/AboutSection/AboutSection";
+import { BlogSection } from "../components/shared/BlogSection/BlogSection";
 import { Footer } from "../components/shared/Footer/Footer";
 import { HeroSection } from "../components/shared/HeroSection/HeroSection";
 import { LinkButton } from "../components/shared/LinkButton/LinkButton";
@@ -58,6 +59,8 @@ const Index = () => {
             "Linux",
           ]}
         />
+
+          <BlogSection></BlogSection>
 
         <Footer copyright="© 2026 Dawid Małek" />
       </div>
